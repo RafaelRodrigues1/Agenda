@@ -1,0 +1,101 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+body {
+    background-color: #a6f0ff3a;
+    padding-top: 30px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+}
+
+main {  
+    text-align: center;
+    margin: auto;
+}
+
+h1 {
+    color: #319282;
+}
+
+.botao1 {
+    background-color: #319282;
+    color: #fff;
+    padding: 5px 10px;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 700;
+    border-radius: 5px;
+    border: 0;
+    cursor: pointer;
+}
+
+form {
+	width: fit-content;
+    margin: auto;
+}
+
+input {	
+	padding: 3px;
+	margin-bottom: 10px;
+	display: block;
+	border: 1px solid #319282;
+	border-radius: 5px;
+}
+
+.caixa1 {
+	width: 320px;
+}
+
+.caixa2 {
+	margin-left: 0px;
+}
+
+#caixa3 {
+	width: 50px;
+}
+
+table {
+    width: fit-content;
+    margin: 20px auto;
+    border-collapse: collapse;
+}	
+
+table > thead > tr {
+	background-color: #319282;
+	color: #fff; 
+}
+
+table > tbody > tr {
+    background-color: white;
+}
+
+td {    
+	text-align: left;
+}
+
+td, th {
+	border: 1px solid #e0e0e0;
+	padding: 8px;
+}
+
+tbody > tr:hover {
+	background-color: #788f8b;
+	color: #fff;
+}
+
+.botaoTable {
+	font-size: 1em;
+}
+
+#botaoExcluir {
+    background-color: #973e2e;
+}
+
+td.id {
+	text-align: center;
+}
+
+td.opcoes {
+	background-color: white;
+}
