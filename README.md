@@ -1,6 +1,6 @@
 Aplicação web de um CRUD de contatos. 
 
-Utilizando Servlet, JSP, HTML & CSS, JDBC e Mysql 
+Utilizando Servlet, JSP, HTML & CSS, JPA/Hibernate e Mysql 
 
 ![Página inicial](https://github.com/RafaelRodrigues1/Agenda/blob/master/Github%20imagens/index.jpg)
 ![Página principal](https://github.com/RafaelRodrigues1/Agenda/blob/master/Github%20imagens/main.jpg)

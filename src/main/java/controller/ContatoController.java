@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Contato;
-import model.ContatoDao;
+import model.dao.GenericDAO;
+import model.entities.Contato;
 
 @WebServlet(urlPatterns = { "/Controller", "/main", "/insert", "/select", "/update", "/delete"})
 public class ContatoController extends HttpServlet {
@@ -39,8 +39,8 @@ public class ContatoController extends HttpServlet {
 
 	private void contatos(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		List<Contato> listaContatos = ContatoDao.getInstance().listarContatos();
+		
+		List<Contato> listaContatos = new GenericDAO<Contato>(Contato.class).findAll();
 		request.setAttribute("lista", listaContatos);
 		request.getRequestDispatcher("agenda.jsp").forward(request, response);
 	}
@@ -51,15 +51,19 @@ public class ContatoController extends HttpServlet {
 		contato = new Contato(request.getParameter("nome"), request.getParameter("fone"),
 				request.getParameter("email"));
 
-		ContatoDao.getInstance().inserirContato(contato);
+		new GenericDAO<Contato>(Contato.class)
+							.beginTransaction()
+							.save(contato)
+							.commitTransaction()
+							.closeEntity();;
 		response.sendRedirect("main");
 	}
 
 	private void buscarContato(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		Integer id = Integer.parseInt(request.getParameter("id"));
-		contato = ContatoDao.getInstance().buscarPorId(id);
+		Integer id = Integer.parseInt(request.getParameter("id"));		
+		contato = new GenericDAO<Contato>(Contato.class).findById(id);
 		
 		request.setAttribute("contato", contato);
 		request.getRequestDispatcher("update.jsp").forward(request, response);
@@ -68,11 +72,15 @@ public class ContatoController extends HttpServlet {
 	private void alterarContato(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		Integer id = Integer.parseInt(request.getParameter("id"));
+		Integer id = Integer.parseInt(request.getParameter("id"));		
 		contato = new Contato(id, request.getParameter("nome"), request.getParameter("fone"),
 				request.getParameter("email"));
-		
-		ContatoDao.getInstance().alterarContato(contato);
+
+		new GenericDAO<Contato>(Contato.class)
+							.beginTransaction()
+							.update(contato)
+							.commitTransaction()
+							.closeEntity();
 		response.sendRedirect("main");
 	}
 	
@@ -81,7 +89,11 @@ public class ContatoController extends HttpServlet {
 		
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		
-		ContatoDao.getInstance().excluirContato(id);
+		new GenericDAO<Contato>(Contato.class)
+							.beginTransaction()
+							.delete(id)
+							.commitTransaction()
+							.closeEntity();
 		response.sendRedirect("main");
 	}
 }
