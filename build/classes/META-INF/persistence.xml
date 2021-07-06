@@ -6,7 +6,8 @@
     <persistence-unit name="dbagenda">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         
-        <class>model.entities.Contato</class>
+        <class>model.entities.Contact</class>
+        <class>model.entities.User</class>
 
     <!--<mapping-file>META-INF/consultas.xml</mapping-file>-->
 

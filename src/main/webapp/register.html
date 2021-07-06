@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        label {
+            text-align: left;
+            display: block;
+            color: red;
+            font-size: 0.7em;
+            display: none;
+        }
+    </style>
+    <title>Cadastre-se</title>
+</head>
+<body>
+    <main>
+        <h1>Cadastro</h1>
+        <form name="formUser" action="register"
+        method="POST">
+            <input type="text" name="name" placeholder="Nome Completo" class="caixa1">
+            <input type="date" name="date" id="data">
+            <input type="email" name="login" placeholder="E-mail" class="caixa1">
+            <input type="password" name="password" placeholder="Senha de 8 a 16 caracteres" class="caixa1" id="senha">
+            <input type="password" name="repeatPass" placeholder="Repita a senha" class="caixa1">
+            <label for="" id="errorPass">*Senhas não coincidem</label>
+            
+            <input type="button" class="botao1" value="Cadastrar" onclick="validaUsuario()">
+        </form>
+        <script type="text/javascript" src="scripts/validarUsuario.js"></script>
+    </main>
+</body>
+</html>

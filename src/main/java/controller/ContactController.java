@@ -9,18 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.dao.ContactDAO;
 import model.dao.GenericDAO;
-import model.entities.Contato;
+import model.entities.Contact;
+import model.entities.User;
 
 @WebServlet(urlPatterns = { "/Controller", "/main", "/insert", "/select", "/update", "/delete"})
-public class ContatoController extends HttpServlet {
+public class ContactController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private Contato contato;
+	private Contact contact;
+	private User user;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		if(request.getSession().getAttribute("user") == null) {
+			response.sendRedirect("index.html");
+		}
 		String action = request.getServletPath();
 		if (action.equals("/main")) {
 			contatos(request, response);
@@ -39,21 +44,23 @@ public class ContatoController extends HttpServlet {
 
 	private void contatos(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		user = (User) request.getSession().getAttribute("user");
 		
-		List<Contato> listaContatos = new GenericDAO<Contato>(Contato.class).findAll();
-		request.setAttribute("lista", listaContatos);
+		List<Contact> contactsList = new ContactDAO().findAll(user);
+		request.setAttribute("list", contactsList);
 		request.getRequestDispatcher("agenda.jsp").forward(request, response);
 	}
 
 	private void novoContato(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		contato = new Contato(request.getParameter("nome"), request.getParameter("fone"),
-				request.getParameter("email"));
+		user = (User) request.getSession().getAttribute("user");
+		contact = new Contact(request.getParameter("name"), request.getParameter("phone"),
+				request.getParameter("email"), user);
 
-		new GenericDAO<Contato>(Contato.class)
+		new GenericDAO<Contact>(Contact.class)
 							.beginTransaction()
-							.save(contato)
+							.save(contact)
 							.commitTransaction()
 							.closeEntity();;
 		response.sendRedirect("main");
@@ -63,24 +70,26 @@ public class ContatoController extends HttpServlet {
 			throws ServletException, IOException {
 		
 		Integer id = Integer.parseInt(request.getParameter("id"));		
-		contato = new GenericDAO<Contato>(Contato.class).findById(id);
+		contact = new GenericDAO<Contact>(Contact.class).findById(id);
 		
-		request.setAttribute("contato", contato);
+		request.setAttribute("contact", contact);
 		request.getRequestDispatcher("update.jsp").forward(request, response);
 	}
 	
 	private void alterarContato(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		user = (User) request.getSession().getAttribute("user");
+		
 		Integer id = Integer.parseInt(request.getParameter("id"));		
-		contato = new Contato(id, request.getParameter("nome"), request.getParameter("fone"),
-				request.getParameter("email"));
-
-		new GenericDAO<Contato>(Contato.class)
-							.beginTransaction()
-							.update(contato)
-							.commitTransaction()
-							.closeEntity();
+		contact = new Contact(id, request.getParameter("name"), request.getParameter("phone"),
+				request.getParameter("email"), user);
+		new GenericDAO<Contact>(Contact.class)
+						.beginTransaction()
+						.update(contact)
+						.commitTransaction()
+						.closeEntity();
+		
 		response.sendRedirect("main");
 	}
 	
@@ -89,7 +98,7 @@ public class ContatoController extends HttpServlet {
 		
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		
-		new GenericDAO<Contato>(Contato.class)
+		new GenericDAO<Contact>(Contact.class)
 							.beginTransaction()
 							.delete(id)
 							.commitTransaction()

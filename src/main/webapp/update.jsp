@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ page import="model.entities.Contato" %>
-	<%Contato contato = (Contato) request.getAttribute("contato"); %>
+	<%@ page import="model.entities.Contact" %>
+	<%Contact contact = (Contact) request.getAttribute("contact"); %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -11,20 +11,22 @@
 	<link rel="shortcut icon" href="imagens/favicon.png" type="image/x-icon">
 	<title>Atualização de Dados</title>
 	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript" src="scripts/validador.js"></script>
 </head>
 <body>
 	
 	<main>
 		<h1>Atualizar Contato</h1>
 		
-		<form name="formContato" action="update">
-			<input type="text" name="id" id="caixa3" readonly value="<%=contato.getId()%>"/>
-			<input type="text" name="nome" placeholder="Nome Completo" class="caixa1"value="<%=contato.getNome()%>">
-			<input type="text" name="fone" placeholder="Fone" class="caixa2" value="<%=contato.getFone()%>">
-			<input type="text" name="email" placeholder="E-mail" class="caixa1" value="<%=contato.getEmail()%>">
-			<input type="button" class="botao1" value="Alterar" onclick="validar()">
+		<form name="formContact" action="update">
+			<input type="text" name="id" id="caixa3" readonly value="<%=contact.getId()%>"/>
+			<input type="text" name="name" placeholder="Nome Completo" class="caixa1"value="<%=contact.getName()%>">
+			<input type="text" name="phone" placeholder="Fone" class="caixa2" value="<%=contact.getPhone()%>">
+			<input type="text" name="email" placeholder="E-mail" class="caixa1" value="<%=contact.getEmail()%>">
+			
+			<input type="button" class="botao1" value="Alterar" onclick="validateContact()">
 		</form>
-		<script type="text/javascript" src="scripts/validador.js"></script>
+		
 	</main>
 </body>
 </html>

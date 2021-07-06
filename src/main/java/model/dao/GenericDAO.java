@@ -11,9 +11,9 @@ import model.entities.Entities;
 
 public class GenericDAO<T extends Entities> {
 
-	private static EntityManagerFactory factory;
-	private EntityManager entity;
-	private Class<T> clasS;
+	protected static EntityManagerFactory factory;
+	protected EntityManager entity;
+	protected Class<T> clasS;
 	
 	static {
 		if(factory == null) {
@@ -56,7 +56,7 @@ public class GenericDAO<T extends Entities> {
 	
 	public GenericDAO<T> update(T t) {
 		try{
-		entity.merge(t);
+			entity.merge(t);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

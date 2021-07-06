@@ -7,12 +7,29 @@
     <link rel="shortcut icon" href="imagens/favicon.png" type="image/x-icon">
     <title>Agenda de contatos</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        a {
+            font-size: 0.8em;
+            text-decoration: none;
+            color: #319282;
+            padding: 3px;
+            font-weight: 700;
+        }
+        a:hover {            
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <main>
         <img width="300px" src="imagens/agenda.png" alt="Imagem de agenda" title="Agenda">
         <h1>Agenda de Contatos</h1>
-        <a href="main" class="botao1">Acessar</a>
+        <form action="login" method="POST">
+            <input type="email" name="login" placeholder="Login" class="caixa1">
+			<input type="password" name="password" placeholder="Senha" class="caixa1" required>
+            <input type="submit" class="botao1" value="Acessar">
+        </form>
+        <a href="register.html">Ainda não é cadastrado?</a>
     </main>
 </body>
 </html>

@@ -2,18 +2,21 @@
  * Validação de formulário
  */
 
-function validar(){
-	let nome = formContato.nome.value
-	let fone = formContato.fone.value
-	if(nome === ""){
+function validateContact(){
+	let name = formContact.name.value
+	let phone = formContact.phone.value
+	if(name === ""){
 		alert("Preencha o campo Nome Completo")
-		formContato.nome.focus()
+		formContact.name.focus()
 		return false
-	}else if(fone === ""){
+	}else if(phone === ""){
 		alert("Preencha o campo Fone")
-		formContato.fone.focus()
+		formContact.phone.focus()
 		return false
 	} else {
-		document.forms["formContato"].submit()
+		document.forms["formContact"].submit()
 	}
 }
+
+
+	
